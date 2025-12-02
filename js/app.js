@@ -498,7 +498,7 @@ function showReport() {
 
 const TimerDisplay = document.getElementById('timer')
 const POMODORO_SETTINGS = {
-    WORK_TIME: 7 * 60,      // 25 минут в секундах
+    WORK_TIME: 25 * 60,      // 25 минут в секундах
     SHORT_BREAK: 5 * 60,     // 5 минут
     LONG_BREAK: 20 * 60,     // 20 минут
     SESSIONS_BEFORE_LONG_BREAK: 4  // 4 рабочих сессии
@@ -514,7 +514,7 @@ let timerState={
 function startTimer(){
     if( timerState.isRunnig){return;}
     timerState.isRunnig=true;
-    timerState.interval = setInterval(updateTimer,10)
+    timerState.interval = setInterval(updateTimer,1000)
     document.getElementById('startBtn').disabled = true;
     document.getElementById('pauseBtn').disabled = false;
     showProgress(timerState.currentSessions);
@@ -682,6 +682,7 @@ function showProgress(n){
         });
         
       
+
 
 
  
