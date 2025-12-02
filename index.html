@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Туду-Лист</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="app">
+
+        <div class="header">
+            <h1>✅ Мой Туду-Лист</h1>
+            <button class="quick-add-btn" >Создать задачу</button>
+        </div>
+        
+        <div class="main-content">
+
+            <div class="sidebar">
+                <div class="nav-item active" id="dashboard" onclick="dashboard()" >📊 Дашборд</div>
+                <div class="nav-item" id="today" onclick="today()">📅 Сегодня</div>
+                <div class="nav-item" id="future" onclick="future()">⏰ Предстоящие</div>
+                
+                <div class="projects-list">
+                    <h4>Проекты</h4>
+                    <div class="project-item" id="job-link" onclick="job()">💼 Работа</div>
+                    <div class="project-item" id="personal-link" onclick="personal()">🏠 Личное</div>
+                    <div class="project-item" id="buy-link" onclick="buy()">🛒 Покупки</div>
+                    <div class="project-item" id="study-link" onclick="study()">📚 Обучение</div>
+                </div>
+            </div>
+    
+            <div class="dashboard-style dashboard">
+   
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Всего задач</h3>
+                        <div class="stat-number">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Выполнено</h3>
+                        <div class="stat-number">0</div>
+                    </div>
+                                       
+                </div>
+               
+                <div class="tasks-section" id="tasks-place">
+                    
+                </div>
+                
+
+                <div class="tasks-section">
+                    <h3>🎯 Быстрые действия</h3>
+                    <div class="quick-actions">
+                        <div class="action-btn" onclick="startPomodoro()">
+                            <div>🍅</div>
+                            <div>Pomodoro</div>
+                        </div>
+                        <div class="action-btn" onclick="exportData()">
+                            <div>📤</div>
+                            <div>Экспорт</div>
+                        </div>
+                        <div class="action-btn" onclick="showReport()">
+                            <div>📊</div>
+                            <div>Отчёт</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-style today" style="display: none;">
+                <div class="tasks-section" id="tasks-place">
+                    
+                </div>
+            </div>
+            <div class="dashboard-style future" style="display: none;">
+                <div class="tasks-section" id="tasks-place">
+                    
+                </div>
+            </div>
+            <div class="dashboard-style project" style="display: none;">
+                <div class="tasks-section" id="tasks-place">
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div id="description-task-modal" class="modal ">
+        <div class="modal-content">
+            <h1 class="title-task-modal">Hello</h1>
+            <p class="text-task-modal">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error, earum officia similique eos magni quibusdam molestiae neque rerum perspiciatis assumenda ad perferendis, inventore optio dignissimos tenetur! Cum exercitationem minima amet.</p>
+            <button class="description-task-modal-btn" onclick="closeTaskModal()">Закрыть</button>
+        </div>
+
+    </div>
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <h3>📝 Новая задача</h3>
+            
+            <div class="form-group">
+                <label>Название задачи</label>
+                <input type="text" id="task-title" placeholder="Что нужно сделать?">
+            </div>
+            
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea id="task-description" placeholder="Подробности..."></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Проект</label>
+                    <select id="task-project">
+                        <option value="work">💼 Работа</option>
+                        <option value="personal">🏠 Личное</option>
+                        <option value="shopping">🛒 Покупки</option>
+                        <option value="study">📚 Обучение</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Приоритет</label>
+                    <select id="task-priority">
+                        <option value="high">🔴 Высокий</option>
+                        <option value="medium">🟡 Средний</option>
+                        <option value="low">🟢 Низкий</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Дедлайн</label>
+                <input type="date" id="task-deadline">
+            </div>
+            
+            <div class="modal-actions">
+                <button onclick="closeModal()" class="btn-cancel">Отмена</button>
+                <button onclick="addFullTask()" class="btn-save">Добавить задачу</button>
+            </div>
+        </div>
+    </div>
+    <div class="pomodoro-modal" id="pomodoroModal">
+        <div class="pomodoro-header">
+            Pomodoro Timer
+            <button class="close-btn" onclick="closePomodoro()">×</button>
+        </div>
+        
+        <div class="pomodoro-body" id="pomodoroBody">
+            <div class="mode-text work-text" id="modeText">Рабочее время</div>
+            
+            <div class="timer-display" id="timer">25:00</div>
+            
+            <div class="controls">
+                <button class="control-btn start-btn" id="startBtn" onclick="startTimer()">Старт</button>
+                <button class="control-btn pause-btn" id="pauseBtn" onclick="pauseTimer()" disabled>Пауза</button>
+                <button class="control-btn reset-btn" id="resetBtn" onclick="resetTimer()">Сброс</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-title">Прогресс сессии:</div>
+                <div class="progress-circles" id="progressCircles">
+                    <!-- Сгенерируется JavaScript -->
+                </div>
+            </div>
+            
+            <div class="next-break" id="nextBreak">
+                Следующий: короткий перерыв (5 мин)
+            </div>
+        </div>
+    </div>
+    
+    <!-- Скрытый элемент для звука -->
+    <audio id="notificationSound" class="notification-sound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+    </audio>
+    <script src="/js/app.js">
+        
+    </script>
+</body>
+</html>
